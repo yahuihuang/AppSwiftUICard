@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["👾", "🎨"]
+//    var emojis = ["👾", "🎨"， "🤯", "🦊", "😀", "🍟", "🐣", "🌭", "🔍", "🏓", "🍕", "🧩", "🚀", "📌", "⛩️", "🥰", "😈", "🤩", "🗽",  "🧸", "🎾"]
     
     @State var emojisCount = 20
     var body: some View {
         VStack {
+            CardView(context: "👍").frame(width: 90, height: 120, alignment: .center)
             Text("\(emojisCount)")
                 .padding()
             
@@ -44,6 +45,26 @@ struct ContentView: View {
             }
         } label: {
             Image(systemName: "plus.circle")
+        }
+    }
+}
+
+struct CardView: View {
+    var context: String
+    @State var isFaceUp = false
+    var body: some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: 20)
+            if isFaceUp == true {
+                shape.fill().foregroundColor(.white)
+                shape.strokeBorder(lineWidth: 3)
+                Text(context).font(.largeTitle)
+            } else {
+                shape.fill()
+            }
+
+        }.onTapGesture {
+            isFaceUp = !isFaceUp
         }
     }
 }
